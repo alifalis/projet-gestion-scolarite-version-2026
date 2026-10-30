@@ -1,13 +1,15 @@
-package modele;
 
+package modele;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "enseignants") // Correspond à la table enseignants
+@Table(name = "enseignants")
 public class Enseignant implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +23,22 @@ public class Enseignant implements Serializable {
     @Column(name = "contact", length = 15)
     private String contact;
 
-    @Column(name = "specialite", length = 100, nullable = false)
-    private String specialite;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_specialite")
+    private Specialite specialite;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(
+        name = "id_utilisateur",
+        referencedColumnName = "id_utilisateur",
+        nullable = false,
+        unique = true
+    )
     private Utilisateur utilisateur;
+
+    // Constructeur par défaut requis par JPA
+    public Enseignant() {
+    }
 
     // Getters et Setters
     public int getIdEnseignant() {
@@ -53,11 +65,11 @@ public class Enseignant implements Serializable {
         this.contact = contact;
     }
 
-    public String getSpecialite() {
+    public Specialite getSpecialite() {
         return specialite;
     }
 
-    public void setSpecialite(String specialite) {
+    public void setSpecialite(Specialite specialite) {
         this.specialite = specialite;
     }
 
@@ -68,5 +80,19 @@ public class Enseignant implements Serializable {
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
-}
 
+    @Override
+    public String toString() {
+        return "Enseignant{" +
+                "idEnseignant=" + idEnseignant +
+                ", dateNaissance=" + dateNaissance +
+                ", contact='" + contact + '\'' +
+                ", specialite=" +
+                (specialite != null ? specialite.getNom() : "null") +
+                ", utilisateur=" +
+                (utilisateur != null
+                    ? utilisateur.getNom() + " " + utilisateur.getPrenom()
+                    : "null") +
+                '}';
+    }
+}

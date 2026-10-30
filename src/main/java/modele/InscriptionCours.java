@@ -1,10 +1,19 @@
+
 package modele;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "inscriptions_cours")
+@Table(
+    name = "inscriptions_cours",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "unique_inscription_cours",
+            columnNames = {"id_etudiant", "id_cours"}
+        )
+    }
+)
 public class InscriptionCours {
 
     @Id
@@ -12,11 +21,11 @@ public class InscriptionCours {
     @Column(name = "id_inscription", nullable = false)
     private int idInscription;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_etudiant", nullable = false)
     private Etudiant etudiant;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cours", nullable = false)
     private Cours cours;
 
@@ -25,6 +34,10 @@ public class InscriptionCours {
 
     @Column(name = "fin_cours", nullable = false)
     private LocalDateTime finCours;
+
+    // Constructeur par défaut requis par JPA
+    public InscriptionCours() {
+    }
 
     // Getters et Setters
     public int getIdInscription() {

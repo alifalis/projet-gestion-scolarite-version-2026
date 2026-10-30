@@ -33,7 +33,7 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
 - **Controller** : Servlets pour la gestion des requêtes HTTP et de la logique métier.
 
 ### **Technologies utilisées**
-- **Langages** : Java (J2EE), HTML5, CSS3, JavaScript.
+- **Langages** : Java 21 ou supérieur (J2EE), HTML5, CSS3, JavaScript.
 - **Frameworks** : Hibernate (ORM), Spring (Injection de dépendances et gestion).
 - **Serveur d'applications** : Apache Tomcat.
 - **Base de données** : MySQL.
@@ -47,17 +47,19 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
    git clone https://github.com/abdemeh/gestionScolarite_JEE.git
    ```
 
-2. **Configurer la base de données** :
+2. **Installer Java 21 ou supérieur** et Maven.
+
+3. **Configurer la base de données** :
    - Importer le fichier SQL disponible dans `sql/schema.sql` pour créer la base et les tables.
 
-3. **Configurer le projet** :
+4. **Configurer le projet** :
    - Modifier le fichier `hibernate.cfg.xml` pour inclure les informations d'identification de votre base de données.
 
-4. **Déployer l’application** :
+5. **Déployer l’application** :
    - Copier le projet dans le répertoire de déploiement d’Apache Tomcat.
    - Lancer le serveur Tomcat.
 
-5. **Accéder à l’application** :
+6. **Accéder à l’application** :
    - Ouvrez le navigateur et accédez à `http://localhost:8080/projetJEE`.
 
 ## Équipe de Développement

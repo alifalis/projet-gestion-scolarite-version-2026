@@ -2,7 +2,7 @@
     <session-factory>
         <!-- Configuration JDBC -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jee_project</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school_data</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
 
@@ -20,10 +20,13 @@
         <mapping class="modele.Etudiant"/>
         <mapping class="modele.Cours"/>
         <mapping class="modele.Enseignant"/>
-        <mapping class="modele.InscriptionCours"/>
-        <mapping class="modele.Note"/>
+        <mapping class="modele.Resultat"/>
         <mapping class="modele.Utilisateur"/>
         <mapping class="modele.InscriptionAnnee"/>
+        <mapping class="modele.InscriptionCours"/>
+        <mapping class="modele.Classe"/>
+        <mapping class="modele.Specialite"/>
+        <mapping class="modele.Role"/>
         <!-- Ajoutez d'autres classes ici si nécessaire -->
 
     </session-factory>

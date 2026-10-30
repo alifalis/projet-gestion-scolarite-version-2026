@@ -1,7 +1,6 @@
 package servletexecutionbdd;
 
 
-import admin.ExecuteSchema;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
@@ -13,7 +12,7 @@ public class SchemaInitializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Démarrage de l'application - Initialisation du schéma de la base de données.");
         try {
-            ExecuteSchema.creationBase(); // Appelle la méthode pour créer ou initialiser la base
+            SchemaScriptExecutor.initializeDatabase();
             System.out.println("Schéma de la base de données initialisé avec succès.");
         } catch (Exception e) {
             System.err.println("Erreur lors de l'initialisation du schéma de la base de données : " + e.getMessage());

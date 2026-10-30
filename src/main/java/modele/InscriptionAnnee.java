@@ -1,26 +1,48 @@
+
 package modele;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "inscriptions_annee")
+@Table(
+    name = "inscriptions_annee",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "unique_inscription_annee",
+            columnNames = {"id_etudiant", "annee_scolaire"}
+        )
+    }
+)
 public class InscriptionAnnee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_inscription")
+    @Column(name = "id_inscription", nullable = false)
     private int idInscription;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_etudiant", nullable = false)
     private Etudiant etudiant;
 
-    @Column(name = "date_inscription", nullable = false, updatable = false)
+    @Column(name = "annee_scolaire", nullable = false, length = 9)
+    private String anneeScolaire;
+
+    @Column(
+        name = "date_inscription",
+        nullable = false,
+        updatable = false
+    )
     private LocalDateTime dateInscription;
 
+    // Constructeur par défaut requis par JPA
     public InscriptionAnnee() {
-        this.dateInscription = LocalDateTime.now();
+    }
+
+    // Constructeur avec les informations principales
+    public InscriptionAnnee(Etudiant etudiant, String anneeScolaire) {
+        this.etudiant = etudiant;
+        this.anneeScolaire = anneeScolaire;
     }
 
     // Getters et Setters
@@ -40,6 +62,14 @@ public class InscriptionAnnee {
         this.etudiant = etudiant;
     }
 
+    public String getAnneeScolaire() {
+        return anneeScolaire;
+    }
+
+    public void setAnneeScolaire(String anneeScolaire) {
+        this.anneeScolaire = anneeScolaire;
+    }
+
     public LocalDateTime getDateInscription() {
         return dateInscription;
     }
@@ -52,7 +82,9 @@ public class InscriptionAnnee {
     public String toString() {
         return "InscriptionAnnee{" +
                 "idInscription=" + idInscription +
-                ", etudiant=" + etudiant +
+                ", idEtudiant=" +
+                (etudiant != null ? etudiant.getIdEtudiant() : null) +
+                ", anneeScolaire='" + anneeScolaire + '\'' +
                 ", dateInscription=" + dateInscription +
                 '}';
     }
