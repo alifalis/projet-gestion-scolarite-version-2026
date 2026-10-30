@@ -1,6 +1,5 @@
-<%@ page import="java.util.List" %>
-<%@ page import="modele.Note" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%
     // Session verification
     String userRole = (String) session.getAttribute("user");
@@ -10,7 +9,7 @@
     }
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Gestion des Notes</title>
@@ -56,54 +55,56 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% List<Note> notes = (List<Note>) request.getAttribute("resultats");
-                    if (notes != null && !notes.isEmpty()) {
-                        for (Note note : notes) { %>
-                <tr>
-                    <td><%= note.getEtudiant().getIdEtudiant() %></td>
-                    <td><%= note.getEtudiant().getUtilisateur().getNom() %></td>
-                    <td><%= note.getEtudiant().getUtilisateur().getPrenom() %></td>
-                    <td><%= note.getCours().getNomCours() %></td>
-                    <td>
-                        <input type="hidden" name="id_resultat" value="<%= note.getIdNote() %>"/>
-                        <input type="number" name="note_<%= note.getIdNote() %>" value="<%= note.getNote() %>" step="0.01"/>
-                    </td>
-                </tr>
-                <% }
-                } else { %>
-                <tr>
-                    <td colspan="5">Aucun résultat trouvé pour ce professeur.</td>
-                </tr>
-                <% } %>
+                <c:choose>
+                    <c:when test="${not empty resultats}">
+                        <c:forEach items="${resultats}" var="resultat">
+                            <tr>
+                                <td><c:out value="${resultat.etudiant.idEtudiant}" /></td>
+                                <td><c:out value="${resultat.etudiant.utilisateur.nom}" /></td>
+                                <td><c:out value="${resultat.etudiant.utilisateur.prenom}" /></td>
+                                <td><c:out value="${resultat.cours.nomCours}" /></td>
+                                <td>
+                                    <input type="hidden" name="id_resultat"
+                                           value="<c:out value='${resultat.idResultat}' />" />
+                                     <label for="note_${resultat.idResultat}">
+                                         Note /20
+                                     </label>
+                                    <input type="number"
+                                         id="note_${resultat.idResultat}"
+                                           name="note_${resultat.idResultat}"
+                                           value="<c:out value='${resultat.note}' />"
+                                           min="0" max="20" step="0.01" />
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td colspan="5">Aucun résultat trouvé pour ce professeur.</td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
                 </tbody>
             </table>
             <button type="submit">Enregistrer les Modifications</button>
         </form>
         <form action="notifierEtudiants" method="post" style="margin-top: 5px;">
-            <% if (notes != null && !notes.isEmpty()) { %>
-            <% for (Note note : notes) { %>
-            <input type="hidden" name="emails" value="<%= note.getEtudiant().getUtilisateur().getEmail() %>"/>
-            <% } %>
-            <% } %>
+            <c:forEach items="${resultats}" var="resultat">
+                <input type="hidden" name="emails"
+                       value="<c:out value='${resultat.etudiant.utilisateur.email}' />" />
+            </c:forEach>
             <button type="submit">Notifier les Étudiants par email</button>
         </form>
-        <%
-            // Display success message
-            String message = (String) request.getAttribute("message");
-            if (message != null && !message.isEmpty()) {
-        %>
-        <div class="success-message"><%= message %></div>
-        <%
-            }
-
-            // Display general error message
-            String errorMessage = (String) request.getAttribute("errorMessage");
-            if (errorMessage != null && !errorMessage.isEmpty()) {
-        %>
-        <div class="error-message"><%= errorMessage %></div>
-        <%
-            }
-        %>
+        <c:if test="${not empty requestScope.message}">
+            <output class="success-message">
+                <c:out value="${requestScope.message}" />
+            </output>
+        </c:if>
+        <c:if test="${not empty requestScope.errorMessage}">
+            <div class="error-message" role="alert">
+                <c:out value="${requestScope.errorMessage}" />
+            </div>
+        </c:if>
     </div>
     <footer>
         <p>© 2024 - Gestion des Notes</p>

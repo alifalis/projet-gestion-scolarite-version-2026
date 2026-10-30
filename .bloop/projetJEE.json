@@ -1,0 +1,736 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "projetJEE",
+        "directory": "/mnt/documents/gestionScolarite_JEE",
+        "workspaceDir": "/mnt/documents/gestionScolarite_JEE",
+        "sources": [
+            "/mnt/documents/gestionScolarite_JEE/src/main/java",
+            "/mnt/documents/gestionScolarite_JEE/src/main/servlet"
+        ],
+        "dependencies": [
+            
+        ],
+        "classpath": [
+            "/mnt/documents/gestionScolarite_JEE/target/classes",
+            "/home/alif/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0.jar",
+            "/home/alif/.m2/repository/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0.jar",
+            "/home/alif/.m2/repository/jakarta/el/jakarta.el-api/5.0.0/jakarta.el-api-5.0.0.jar",
+            "/home/alif/.m2/repository/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1.jar",
+            "/home/alif/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar",
+            "/home/alif/.m2/repository/org/hibernate/orm/hibernate-core/6.3.1.Final/hibernate-core-6.3.1.Final.jar",
+            "/home/alif/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar",
+            "/home/alif/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar",
+            "/home/alif/.m2/repository/org/json/json/20210307/json-20210307.jar",
+            "/home/alif/.m2/repository/jakarta/mail/jakarta.mail-api/2.1.0/jakarta.mail-api-2.1.0.jar",
+            "/home/alif/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar",
+            "/home/alif/.m2/repository/com/sun/mail/jakarta.mail/2.0.1/jakarta.mail-2.0.1.jar",
+            "/home/alif/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar",
+            "/home/alif/.m2/repository/com/itextpdf/itextpdf/5.5.13.2/itextpdf-5.5.13.2.jar",
+            "/home/alif/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar",
+            "/home/alif/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar"
+        ],
+        "out": "/mnt/documents/gestionScolarite_JEE/target",
+        "classesDir": "/mnt/documents/gestionScolarite_JEE/target/classes",
+        "resources": [
+            "/mnt/documents/gestionScolarite_JEE/src/main/resources"
+        ],
+        "java": {
+            "options": [
+                "-g",
+                "--release",
+                "21",
+                "-encoding",
+                "UTF-8"
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework",
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "utest.runner.Framework"
+                    ]
+                },
+                {
+                    "names": [
+                        "munit.Framework"
+                    ]
+                },
+                {
+                    "names": [
+                        "mill.testng.TestNGFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    {
+                        "args": [
+                            "-v",
+                            "-a"
+                        ],
+                        "framework": {
+                            "names": [
+                                "com.novocode.junit.JUnitFramework"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "/usr/lib/jvm/java-21-openjdk-amd64",
+                "options": [
+                    
+                ]
+            },
+            "mainClass": [
+                
+            ],
+            "classpath": [
+                "/mnt/documents/gestionScolarite_JEE/target/classes",
+                "/home/alif/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0.jar",
+                "/home/alif/.m2/repository/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0.jar",
+                "/home/alif/.m2/repository/jakarta/el/jakarta.el-api/5.0.0/jakarta.el-api-5.0.0.jar",
+                "/home/alif/.m2/repository/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1.jar",
+                "/home/alif/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar",
+                "/home/alif/.m2/repository/org/hibernate/orm/hibernate-core/6.3.1.Final/hibernate-core-6.3.1.Final.jar",
+                "/home/alif/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar",
+                "/home/alif/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar",
+                "/home/alif/.m2/repository/org/json/json/20210307/json-20210307.jar",
+                "/home/alif/.m2/repository/jakarta/mail/jakarta.mail-api/2.1.0/jakarta.mail-api-2.1.0.jar",
+                "/home/alif/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar",
+                "/home/alif/.m2/repository/com/sun/mail/jakarta.mail/2.0.1/jakarta.mail-2.0.1.jar",
+                "/home/alif/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar",
+                "/home/alif/.m2/repository/com/itextpdf/itextpdf/5.5.13.2/itextpdf-5.5.13.2.jar",
+                "/home/alif/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar",
+                "/home/alif/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar",
+                "/home/alif/.m2/repository/org/jboss/logging/jboss-logging/3.5.0.Final/jboss-logging-3.5.0.Final.jar",
+                "/home/alif/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.6.Final/hibernate-commons-annotations-6.0.6.Final.jar",
+                "/home/alif/.m2/repository/io/smallrye/jandex/3.1.2/jandex-3.1.2.jar",
+                "/home/alif/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1.jar",
+                "/home/alif/.m2/repository/net/bytebuddy/byte-buddy/1.14.7/byte-buddy-1.14.7.jar",
+                "/home/alif/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.0/jakarta.xml.bind-api-4.0.0.jar",
+                "/home/alif/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.2/jaxb-runtime-4.0.2.jar",
+                "/home/alif/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.2/jaxb-core-4.0.2.jar",
+                "/home/alif/.m2/repository/org/eclipse/angus/angus-activation/2.0.0/angus-activation-2.0.0.jar",
+                "/home/alif/.m2/repository/org/glassfish/jaxb/txw2/4.0.2/txw2-4.0.2.jar",
+                "/home/alif/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.1/istack-commons-runtime-4.1.1.jar",
+                "/home/alif/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar",
+                "/home/alif/.m2/repository/org/antlr/antlr4-runtime/4.10.1/antlr4-runtime-4.10.1.jar",
+                "/home/alif/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar"
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "jakarta.mail",
+                    "name": "jakarta.mail-api",
+                    "version": "2.1.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.mail-api",
+                            "path": "/home/alif/.m2/repository/jakarta/mail/jakarta.mail-api/2.1.0/jakarta.mail-api-2.1.0.jar"
+                        },
+                        {
+                            "name": "jakarta.mail-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/mail/jakarta.mail-api/2.1.0/jakarta.mail-api-2.1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.glassfish.jaxb",
+                    "name": "txw2",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "txw2",
+                            "path": "/home/alif/.m2/repository/org/glassfish/jaxb/txw2/4.0.2/txw2-4.0.2.jar"
+                        },
+                        {
+                            "name": "txw2",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/glassfish/jaxb/txw2/4.0.2/txw2-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.smallrye",
+                    "name": "jandex",
+                    "version": "3.1.2",
+                    "artifacts": [
+                        {
+                            "name": "jandex",
+                            "path": "/home/alif/.m2/repository/io/smallrye/jandex/3.1.2/jandex-3.1.2.jar"
+                        },
+                        {
+                            "name": "jandex",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/io/smallrye/jandex/3.1.2/jandex-3.1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.hibernate.orm",
+                    "name": "hibernate-core",
+                    "version": "6.3.1.Final",
+                    "artifacts": [
+                        {
+                            "name": "hibernate-core",
+                            "path": "/home/alif/.m2/repository/org/hibernate/orm/hibernate-core/6.3.1.Final/hibernate-core-6.3.1.Final.jar"
+                        },
+                        {
+                            "name": "hibernate-core",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/hibernate/orm/hibernate-core/6.3.1.Final/hibernate-core-6.3.1.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.mindrot",
+                    "name": "jbcrypt",
+                    "version": "0.4",
+                    "artifacts": [
+                        {
+                            "name": "jbcrypt",
+                            "path": "/home/alif/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar"
+                        },
+                        {
+                            "name": "jbcrypt",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.json",
+                    "name": "json",
+                    "version": "20210307",
+                    "artifacts": [
+                        {
+                            "name": "json",
+                            "path": "/home/alif/.m2/repository/org/json/json/20210307/json-20210307.jar"
+                        },
+                        {
+                            "name": "json",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/json/json/20210307/json-20210307-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.persistence",
+                    "name": "jakarta.persistence-api",
+                    "version": "3.1.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.persistence-api",
+                            "path": "/home/alif/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar"
+                        },
+                        {
+                            "name": "jakarta.persistence-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.opentest4j",
+                    "name": "opentest4j",
+                    "version": "1.3.0",
+                    "artifacts": [
+                        {
+                            "name": "opentest4j",
+                            "path": "/home/alif/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar"
+                        },
+                        {
+                            "name": "opentest4j",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.protobuf",
+                    "name": "protobuf-java",
+                    "version": "3.21.9",
+                    "artifacts": [
+                        {
+                            "name": "protobuf-java",
+                            "path": "/home/alif/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar"
+                        },
+                        {
+                            "name": "protobuf-java",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.activation",
+                    "name": "jakarta.activation-api",
+                    "version": "2.1.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.activation-api",
+                            "path": "/home/alif/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar"
+                        },
+                        {
+                            "name": "jakarta.activation-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter-engine",
+                    "version": "5.10.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter-engine",
+                            "path": "/home/alif/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar"
+                        },
+                        {
+                            "name": "junit-jupiter-engine",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.glassfish.jaxb",
+                    "name": "jaxb-core",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "jaxb-core",
+                            "path": "/home/alif/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.2/jaxb-core-4.0.2.jar"
+                        },
+                        {
+                            "name": "jaxb-core",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.2/jaxb-core-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.xml.bind",
+                    "name": "jakarta.xml.bind-api",
+                    "version": "4.0.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.xml.bind-api",
+                            "path": "/home/alif/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.0/jakarta.xml.bind-api-4.0.0.jar"
+                        },
+                        {
+                            "name": "jakarta.xml.bind-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.0/jakarta.xml.bind-api-4.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.transaction",
+                    "name": "jakarta.transaction-api",
+                    "version": "2.0.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.transaction-api",
+                            "path": "/home/alif/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar"
+                        },
+                        {
+                            "name": "jakarta.transaction-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.eclipse.angus",
+                    "name": "angus-activation",
+                    "version": "2.0.0",
+                    "artifacts": [
+                        {
+                            "name": "angus-activation",
+                            "path": "/home/alif/.m2/repository/org/eclipse/angus/angus-activation/2.0.0/angus-activation-2.0.0.jar"
+                        },
+                        {
+                            "name": "angus-activation",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/eclipse/angus/angus-activation/2.0.0/angus-activation-2.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.h2database",
+                    "name": "h2",
+                    "version": "2.2.224",
+                    "artifacts": [
+                        {
+                            "name": "h2",
+                            "path": "/home/alif/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar"
+                        },
+                        {
+                            "name": "h2",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.jboss.logging",
+                    "name": "jboss-logging",
+                    "version": "3.5.0.Final",
+                    "artifacts": [
+                        {
+                            "name": "jboss-logging",
+                            "path": "/home/alif/.m2/repository/org/jboss/logging/jboss-logging/3.5.0.Final/jboss-logging-3.5.0.Final.jar"
+                        },
+                        {
+                            "name": "jboss-logging",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/jboss/logging/jboss-logging/3.5.0.Final/jboss-logging-3.5.0.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.antlr",
+                    "name": "antlr4-runtime",
+                    "version": "4.10.1",
+                    "artifacts": [
+                        {
+                            "name": "antlr4-runtime",
+                            "path": "/home/alif/.m2/repository/org/antlr/antlr4-runtime/4.10.1/antlr4-runtime-4.10.1.jar"
+                        },
+                        {
+                            "name": "antlr4-runtime",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/antlr/antlr4-runtime/4.10.1/antlr4-runtime-4.10.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.servlet.jsp.jstl",
+                    "name": "jakarta.servlet.jsp.jstl-api",
+                    "version": "3.0.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.servlet.jsp.jstl-api",
+                            "path": "/home/alif/.m2/repository/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0.jar"
+                        },
+                        {
+                            "name": "jakarta.servlet.jsp.jstl-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.sun.mail",
+                    "name": "jakarta.mail",
+                    "version": "2.0.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.mail",
+                            "path": "/home/alif/.m2/repository/com/sun/mail/jakarta.mail/2.0.1/jakarta.mail-2.0.1.jar"
+                        },
+                        {
+                            "name": "jakarta.mail",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/sun/mail/jakarta.mail/2.0.1/jakarta.mail-2.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.platform",
+                    "name": "junit-platform-engine",
+                    "version": "1.10.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-platform-engine",
+                            "path": "/home/alif/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar"
+                        },
+                        {
+                            "name": "junit-platform-engine",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.servlet",
+                    "name": "jakarta.servlet-api",
+                    "version": "6.0.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.servlet-api",
+                            "path": "/home/alif/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0.jar"
+                        },
+                        {
+                            "name": "jakarta.servlet-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml",
+                    "name": "classmate",
+                    "version": "1.5.1",
+                    "artifacts": [
+                        {
+                            "name": "classmate",
+                            "path": "/home/alif/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1.jar"
+                        },
+                        {
+                            "name": "classmate",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/fasterxml/classmate/1.5.1/classmate-1.5.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.jupiter",
+                    "name": "junit-jupiter-api",
+                    "version": "5.10.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-jupiter-api",
+                            "path": "/home/alif/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar"
+                        },
+                        {
+                            "name": "junit-jupiter-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.sun.activation",
+                    "name": "jakarta.activation",
+                    "version": "2.0.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.activation",
+                            "path": "/home/alif/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar"
+                        },
+                        {
+                            "name": "jakarta.activation",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.itextpdf",
+                    "name": "itextpdf",
+                    "version": "5.5.13.2",
+                    "artifacts": [
+                        {
+                            "name": "itextpdf",
+                            "path": "/home/alif/.m2/repository/com/itextpdf/itextpdf/5.5.13.2/itextpdf-5.5.13.2.jar"
+                        },
+                        {
+                            "name": "itextpdf",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/itextpdf/itextpdf/5.5.13.2/itextpdf-5.5.13.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.bytebuddy",
+                    "name": "byte-buddy",
+                    "version": "1.14.7",
+                    "artifacts": [
+                        {
+                            "name": "byte-buddy",
+                            "path": "/home/alif/.m2/repository/net/bytebuddy/byte-buddy/1.14.7/byte-buddy-1.14.7.jar"
+                        },
+                        {
+                            "name": "byte-buddy",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/net/bytebuddy/byte-buddy/1.14.7/byte-buddy-1.14.7-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.inject",
+                    "name": "jakarta.inject-api",
+                    "version": "2.0.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.inject-api",
+                            "path": "/home/alif/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar"
+                        },
+                        {
+                            "name": "jakarta.inject-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.sun.istack",
+                    "name": "istack-commons-runtime",
+                    "version": "4.1.1",
+                    "artifacts": [
+                        {
+                            "name": "istack-commons-runtime",
+                            "path": "/home/alif/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.1/istack-commons-runtime-4.1.1.jar"
+                        },
+                        {
+                            "name": "istack-commons-runtime",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.1/istack-commons-runtime-4.1.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.glassfish.web",
+                    "name": "jakarta.servlet.jsp.jstl",
+                    "version": "3.0.1",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.servlet.jsp.jstl",
+                            "path": "/home/alif/.m2/repository/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1.jar"
+                        },
+                        {
+                            "name": "jakarta.servlet.jsp.jstl",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.mysql",
+                    "name": "mysql-connector-j",
+                    "version": "8.0.33",
+                    "artifacts": [
+                        {
+                            "name": "mysql-connector-j",
+                            "path": "/home/alif/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar"
+                        },
+                        {
+                            "name": "mysql-connector-j",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jakarta.el",
+                    "name": "jakarta.el-api",
+                    "version": "5.0.0",
+                    "artifacts": [
+                        {
+                            "name": "jakarta.el-api",
+                            "path": "/home/alif/.m2/repository/jakarta/el/jakarta.el-api/5.0.0/jakarta.el-api-5.0.0.jar"
+                        },
+                        {
+                            "name": "jakarta.el-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/jakarta/el/jakarta.el-api/5.0.0/jakarta.el-api-5.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apiguardian",
+                    "name": "apiguardian-api",
+                    "version": "1.1.2",
+                    "artifacts": [
+                        {
+                            "name": "apiguardian-api",
+                            "path": "/home/alif/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar"
+                        },
+                        {
+                            "name": "apiguardian-api",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.glassfish.jaxb",
+                    "name": "jaxb-runtime",
+                    "version": "4.0.2",
+                    "artifacts": [
+                        {
+                            "name": "jaxb-runtime",
+                            "path": "/home/alif/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.2/jaxb-runtime-4.0.2.jar"
+                        },
+                        {
+                            "name": "jaxb-runtime",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.2/jaxb-runtime-4.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.junit.platform",
+                    "name": "junit-platform-commons",
+                    "version": "1.10.0",
+                    "artifacts": [
+                        {
+                            "name": "junit-platform-commons",
+                            "path": "/home/alif/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar"
+                        },
+                        {
+                            "name": "junit-platform-commons",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.hibernate.common",
+                    "name": "hibernate-commons-annotations",
+                    "version": "6.0.6.Final",
+                    "artifacts": [
+                        {
+                            "name": "hibernate-commons-annotations",
+                            "path": "/home/alif/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.6.Final/hibernate-commons-annotations-6.0.6.Final.jar"
+                        },
+                        {
+                            "name": "hibernate-commons-annotations",
+                            "classifier": "sources",
+                            "path": "/home/alif/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.6.Final/hibernate-commons-annotations-6.0.6.Final-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "library"
+        ]
+    }
+}

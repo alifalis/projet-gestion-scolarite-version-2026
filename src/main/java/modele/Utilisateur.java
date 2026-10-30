@@ -1,11 +1,14 @@
+
 package modele;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
+
 @Entity
 @Table(name = "utilisateurs")
 public class Utilisateur implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +30,30 @@ public class Utilisateur implements Serializable {
     @Column(name = "mot_de_passe", nullable = false, length = 255)
     private String motDePasse;
 
-    @OneToOne(mappedBy = "utilisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // Un utilisateur peut avoir un rôle partagé avec d'autres utilisateurs
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_role", nullable = false)
+    private Role role;
+
+    // Association avec un étudiant
+    @OneToOne(
+        mappedBy = "utilisateur",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+    )
     private Etudiant etudiant;
 
-    @Column(name = "id_role", nullable = false)
-    private int idRole = 3; // Par défaut, attribuer le rôle "Étudiant"
+    // Association avec un enseignant
+    @OneToOne(
+        mappedBy = "utilisateur",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+    )
+    private Enseignant enseignant;
 
-    // Getters et Setters
+    public Utilisateur() {
+    }
+
     public int getIdUtilisateur() {
         return idUtilisateur;
     }
@@ -49,11 +69,6 @@ public class Utilisateur implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-
-    public Integer getRole() {
-        return idRole;
-    }
-
 
     public String getPrenom() {
         return prenom;
@@ -87,12 +102,36 @@ public class Utilisateur implements Serializable {
         this.motDePasse = motDePasse;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public Etudiant getEtudiant() {
         return etudiant;
     }
 
     public void setEtudiant(Etudiant etudiant) {
         this.etudiant = etudiant;
+
+        if (etudiant != null) {
+            etudiant.setUtilisateur(this);
+        }
+    }
+
+    public Enseignant getEnseignant() {
+        return enseignant;
+    }
+
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
+
+        if (enseignant != null) {
+            enseignant.setUtilisateur(this);
+        }
     }
 
     @Override

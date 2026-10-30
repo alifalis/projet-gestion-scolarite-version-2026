@@ -1,16 +1,18 @@
+
 package modele;
 
-
-
 import jakarta.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "cours")
-public class Cours {
+public class Cours implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cours")
+    @Column(name = "id_cours", nullable = false)
     private int idCours;
 
     @Column(name = "nom_cours", nullable = false, length = 100)
@@ -19,12 +21,15 @@ public class Cours {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_enseignant", referencedColumnName = "id_enseignant")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_enseignant")
     private Enseignant enseignant;
 
-    // Getters et Setters
+    // Constructeur sans argument requis par JPA
+    public Cours() {
+    }
 
+    // Getters et setters
     public int getIdCours() {
         return idCours;
     }
@@ -55,5 +60,16 @@ public class Cours {
 
     public void setEnseignant(Enseignant enseignant) {
         this.enseignant = enseignant;
+    }
+
+    @Override
+    public String toString() {
+        return "Cours{" +
+                "idCours=" + idCours +
+                ", nomCours='" + nomCours + '\'' +
+                ", description='" + description + '\'' +
+                ", enseignant=" +
+                (enseignant != null ? enseignant.getIdEnseignant() : null) +
+                '}';
     }
 }

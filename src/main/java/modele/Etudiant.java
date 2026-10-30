@@ -1,3 +1,4 @@
+
 package modele;
 
 import jakarta.persistence.*;
@@ -7,6 +8,8 @@ import java.util.Date;
 @Entity
 @Table(name = "etudiants")
 public class Etudiant implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,17 +23,25 @@ public class Etudiant implements Serializable {
     @Column(name = "contact", length = 15)
     private String contact;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "classe", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "filiere", nullable = false)
-    private Filiere filiere;
+    @Column(name = "filiere", length = 50)
+    private String filiere;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(
+        name = "id_utilisateur",
+        referencedColumnName = "id_utilisateur",
+        nullable = false,
+        unique = true
+    )
     private Utilisateur utilisateur;
+
+    // Constructeur par défaut requis par JPA
+    public Etudiant() {
+    }
 
     // Getters et Setters
     public int getIdEtudiant() {
@@ -65,11 +76,11 @@ public class Etudiant implements Serializable {
         this.classe = classe;
     }
 
-    public Filiere getFiliere() {
-        return filiere;
-    }
+    public String getFiliere() {
+    return filiere;
+}
 
-    public void setFiliere(Filiere filiere) {
+    public void setFiliere(String filiere) {
         this.filiere = filiere;
     }
 
@@ -87,9 +98,12 @@ public class Etudiant implements Serializable {
                 "idEtudiant=" + idEtudiant +
                 ", dateNaissance=" + dateNaissance +
                 ", contact='" + contact + '\'' +
-                ", classe=" + classe +
+                ", classe=" + (classe != null ? classe.getNom() : "null") +
                 ", filiere=" + filiere +
-                ", utilisateur=" + (utilisateur != null ? utilisateur.getNom() + " " + utilisateur.getPrenom() : "null") +
+                ", utilisateur=" +
+                (utilisateur != null
+                    ? utilisateur.getNom() + " " + utilisateur.getPrenom()
+                    : "null") +
                 '}';
     }
 }

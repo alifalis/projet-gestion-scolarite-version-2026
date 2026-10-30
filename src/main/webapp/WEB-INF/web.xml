@@ -1,47 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-
-    <servlet>
-        <servlet-name>Creer_eleve</servlet-name>
-        <servlet-class>inscription.servletpourlinscription.eleve.Creer_eleve</servlet-class>
-    </servlet>
-
-
-    <servlet-mapping>
-        <servlet-name>Creer_eleve</servlet-name>
-        <url-pattern>/creer_eleve</url-pattern>
-    </servlet-mapping>
-
-
-
-    <servlet>
-        <servlet-name>Creer_enseignant</servlet-name>
-        <servlet-class>inscription.servletpourlinscription.professeur.Creer_enseignant</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Creer_enseignant</servlet-name>
-        <url-pattern>/creer_enseignant</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ListeResultatsServlet</servlet-name>
-        <servlet-class>accespageprof.ListeResultatsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ListeResultatsServlet</servlet-name>
-        <url-pattern>/listeResultats</url-pattern>
-    </servlet-mapping>
-
-
-
-
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
-
