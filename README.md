@@ -64,7 +64,7 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
 
 ## Équipe de Développement
 
-- **Ali Sekaner Alif**
+- **Ali Sekander Alif**
 - **El-Mahdaoui Abdellatif**
 - **Kone Mohamed Lamine**
 - **N’Gokoly Gloddy**
