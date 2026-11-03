@@ -62,6 +62,25 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
 6. **Accéder à l’application** :
    - Ouvrez le navigateur et accédez à `http://localhost:8080/projetJEE`.
 
+### Lancement avec Docker Compose
+
+Docker Desktop ou Docker Engine avec Compose est requis.
+
+1. Copier `.env.example` vers `.env` et modifier les mots de passe si nécessaire.
+2. Construire et démarrer l’application :
+   ```bash
+   docker compose up --build
+   ```
+3. Accéder à `http://localhost:8080`.
+
+Le schéma et les données de démonstration sont initialisés automatiquement par MySQL
+au premier démarrage. Pour réinitialiser complètement la base :
+
+```bash
+docker compose down -v
+docker compose up --build
+```
+
 ## Équipe de Développement
 
 - **Ali Sekander Alif**

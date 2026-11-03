@@ -6,6 +6,7 @@ cd "$PROJECT_DIR"
 
 export JAVA_HOME="${JAVA_HOME:-$PROJECT_DIR/OpenJDK25U-jdk_x64_linux_hotspot_25.0.5_8/jdk-25.0.5+8}"
 export PATH="$JAVA_HOME/bin:$PATH"
+export DB_URL="${DB_URL:-jdbc:mysql://localhost:3306/school_data}"
 
 if [[ ! -x "$JAVA_HOME/bin/java" ]]; then
     printf 'JDK introuvable : %s\n' "$JAVA_HOME" >&2
