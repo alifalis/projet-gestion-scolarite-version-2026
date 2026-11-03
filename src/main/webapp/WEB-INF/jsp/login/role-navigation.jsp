@@ -36,8 +36,8 @@
             </button>
             <ul class="sub-menu">
                 <div>
-                    <li><a href="${pageContext.request.contextPath}/creer_eleve"><span>Inscription élève</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/mettreAJourEtudiant"><span>Réinscription élève</span></a></li>
+                    <li><a href="${pageContext.request.contextPath}/creer_eleve"><span>Inscription étudiant</span></a></li>
+                    <li><a href="${pageContext.request.contextPath}/mettreAJourEtudiant"><span>Réinscription étudiant</span></a></li>
                     <li><a href="${pageContext.request.contextPath}/creer_enseignant"><span>Inscription professeur</span></a></li>
                 </div>
             </ul>

@@ -1,40 +1,60 @@
 package controller;
 
+import application.SpringContext;
 import modele.Enseignant;
 import service.EnseignantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/enseignants")
 public class EnseignantController {
     private final EnseignantService service;
 
     public EnseignantController() {
-        this.service = new EnseignantService();
+        this(SpringContext.getBean(EnseignantService.class));
     }
 
-    public Enseignant ajouterEnseignant(Enseignant enseignant) {
+    @Autowired
+    public EnseignantController(EnseignantService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Enseignant ajouterEnseignant(@RequestBody Enseignant enseignant) {
         verifier(enseignant);
         return service.ajouter(enseignant);
     }
 
-    public Enseignant rechercherEnseignant(int id) {
+    @GetMapping("/{id}")
+    public Enseignant rechercherEnseignant(@PathVariable int id) {
         verifierId(id);
         return service.rechercherParId(id);
     }
-    public Enseignant rechercherEnseignant(String email) {
+    @GetMapping("/recherche")
+    public Enseignant rechercherEnseignant(@RequestParam String email) {
         return service.rechercherParEmail(email);
     }
 
+    @GetMapping
     public List<Enseignant> afficherEnseignants() {
         return service.lister();
     }
 
-    public Enseignant modifierEnseignant(Enseignant enseignant) {
+    @PutMapping("/{id}")
+    public Enseignant modifierEnseignant(
+            @PathVariable int id, @RequestBody Enseignant enseignant) {
+        enseignant.setIdEnseignant(id);
         verifier(enseignant);
         verifierId(enseignant.getIdEnseignant());
         return service.modifier(enseignant);
     }
 
-    public void supprimerEnseignant(int id) {
+    @DeleteMapping("/{id}")
+    public void supprimerEnseignant(@PathVariable int id) {
         verifierId(id);
         service.supprimer(id);
     }

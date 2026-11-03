@@ -1,42 +1,66 @@
 package controller;
 
+import application.SpringContext;
 import modele.Etudiant;
 import service.EtudiantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/etudiants")
 public class EtudiantController {
     private final EtudiantService service;
 
     public EtudiantController() {
-        this.service = new EtudiantService();
+        this(SpringContext.getBean(EtudiantService.class));
     }
 
-    public Etudiant ajouterEtudiant(Etudiant etudiant) {
+    @Autowired
+    public EtudiantController(EtudiantService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Etudiant ajouterEtudiant(@RequestBody Etudiant etudiant) {
         verifier(etudiant);
         return service.ajouter(etudiant);
     }
 
-    public Etudiant rechercherEtudiant(int id) {
+    @GetMapping("/{id}")
+    public Etudiant rechercherEtudiant(@PathVariable int id) {
         verifierId(id);
         return service.rechercherParId(id);
     }
-    public Etudiant rechercherEtudiant(String email) {
+    @GetMapping("/recherche")
+    public Etudiant rechercherEtudiant(@RequestParam String email) {
         
         return service.rechercherParEmail(email);
     }
 
 
+    @GetMapping
     public List<Etudiant> afficherEtudiants() {
         return service.lister();
     }
 
-    public Etudiant modifierEtudiant(Etudiant etudiant) {
+    @PutMapping("/{id}")
+    public Etudiant modifierEtudiant(
+            @PathVariable int id, @RequestBody Etudiant etudiant) {
+        etudiant.setIdEtudiant(id);
         verifier(etudiant);
         verifierId(etudiant.getIdEtudiant());
         return service.modifier(etudiant);
     }
 
-    public void supprimerEtudiant(int id) {
+    public Etudiant modifierEtudiant(Etudiant etudiant) {
+        return modifierEtudiant(etudiant.getIdEtudiant(), etudiant);
+    }
+
+    @DeleteMapping("/{id}")
+    public void supprimerEtudiant(@PathVariable int id) {
         verifierId(id);
         service.supprimer(id);
     }

@@ -30,11 +30,11 @@
 Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparation claire des responsabilités :
 - **Model** : Entités JPA (ex. Étudiant, Professeur, Cours).
 - **View** : Pages JSP pour l’interface utilisateur.
-- **Controller** : Servlets pour la gestion des requêtes HTTP et de la logique métier.
+- **Controller** : Contrôleurs Spring MVC pour la gestion des requêtes HTTP et de la logique métier.
 
 ### **Technologies utilisées**
 - **Langages** : Java 25 (J2EE), HTML5, CSS3, JavaScript.
-- **Frameworks** : Hibernate (ORM), Spring (Injection de dépendances et gestion).
+- **Frameworks** : Spring Boot, Spring MVC, Spring Data JPA et Hibernate.
 - **Serveur d'applications** : Apache Tomcat.
 - **Base de données** : MySQL.
 - **IDE** : IntelliJ IDEA.
@@ -53,11 +53,11 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
    - Importer le fichier SQL disponible dans `sql/schema.sql` pour créer la base et les tables.
 
 4. **Configurer le projet** :
-   - Modifier le fichier `hibernate.cfg.xml` pour inclure les informations d'identification de votre base de données.
+   - Configurer `DB_URL`, `DB_USER` et `DB_PASSWORD` ou modifier `src/main/resources/application.properties`.
 
 5. **Déployer l’application** :
-   - Copier le projet dans le répertoire de déploiement d’Apache Tomcat.
-   - Lancer le serveur Tomcat.
+   - Depuis le projet, lancer `./run-local.sh`.
+   - Le script compile le WAR Spring Boot puis le déploie dans Tomcat.
 
 6. **Accéder à l’application** :
    - Ouvrez le navigateur et accédez à `http://localhost:8080/projetJEE`.

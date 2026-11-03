@@ -1,17 +1,28 @@
 package service;
 
+import application.SpringContext;
 import dao.InscriptionCoursRepository;
 import modele.InscriptionCours;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
+@Transactional
 public class InscriptionCoursService {
 
     private final InscriptionCoursRepository repository;
 
     public InscriptionCoursService() {
-        this.repository = new InscriptionCoursRepository();
+        this(SpringContext.getBean(InscriptionCoursRepository.class));
+    }
+
+    @Autowired
+    public InscriptionCoursService(InscriptionCoursRepository repository) {
+        this.repository = repository;
     }
 
     public InscriptionCours ajouter(InscriptionCours inscription) {

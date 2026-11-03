@@ -1,16 +1,27 @@
 package service;
 
+import application.SpringContext;
 import dao.CoursRepository;
 import modele.Cours;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class CoursService {
 
     private final CoursRepository repository;
 
     public CoursService() {
-        this.repository = new CoursRepository();
+        this(SpringContext.getBean(CoursRepository.class));
+    }
+
+    @Autowired
+    public CoursService(CoursRepository repository) {
+        this.repository = repository;
     }
 
     public Cours ajouter(Cours cours) {

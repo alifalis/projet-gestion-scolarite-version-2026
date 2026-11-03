@@ -43,7 +43,7 @@
         <h1>Gestion des Notes</h1>
     </header>
     <div class="container">
-        <form action="modifierNotes" method="post">
+        <form action="<%= request.getContextPath() %>/modifierNotes" method="post">
             <table>
                 <thead>
                 <tr>
@@ -88,7 +88,7 @@
             </table>
             <button type="submit">Enregistrer les Modifications</button>
         </form>
-        <form action="notifierEtudiants" method="post" style="margin-top: 5px;">
+        <form action="<%= request.getContextPath() %>/notifierEtudiants" method="post" style="margin-top: 5px;">
             <c:forEach items="${resultats}" var="resultat">
                 <input type="hidden" name="emails"
                        value="<c:out value='${resultat.etudiant.utilisateur.email}' />" />

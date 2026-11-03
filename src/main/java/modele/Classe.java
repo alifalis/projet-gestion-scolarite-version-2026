@@ -1,4 +1,3 @@
-
 package modele;
 
 import jakarta.persistence.*;
@@ -17,11 +16,9 @@ public class Classe {
     @Column(name = "nom", nullable = false, unique = true, length = 15)
     private String nom;
 
-    // Une classe peut contenir plusieurs étudiants
     @OneToMany(mappedBy = "classe")
     private Set<Etudiant> etudiants = new HashSet<>();
 
-    // Constructeur vide obligatoire pour JPA
     public Classe() {
     }
 

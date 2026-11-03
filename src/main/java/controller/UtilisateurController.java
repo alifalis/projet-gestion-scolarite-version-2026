@@ -1,46 +1,70 @@
 package controller;
 
+import application.SpringContext;
 import modele.Utilisateur;
 import service.UtilisateurService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/utilisateurs")
 public class UtilisateurController {
     private final UtilisateurService service;
 
     public UtilisateurController() {
-        this.service = new UtilisateurService();
+        this(SpringContext.getBean(UtilisateurService.class));
     }
 
-    public Utilisateur ajouterUtilisateur(Utilisateur utilisateur) {
+    @Autowired
+    public UtilisateurController(UtilisateurService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Utilisateur ajouterUtilisateur(@RequestBody Utilisateur utilisateur) {
         verifier(utilisateur);
         return service.ajouterUtilisateur(utilisateur);
     }
 
-    public Utilisateur rechercherUtilisateur(int id) {
+    @GetMapping("/{id}")
+    public Utilisateur rechercherUtilisateur(@PathVariable int id) {
         verifierId(id);
         return service.rechercherParId(id);
     }
-    public Utilisateur rechercherUtilisateur(String email) {
+    @GetMapping("/recherche")
+    public Utilisateur rechercherUtilisateur(@RequestParam String email) {
 
         return service.rechercherParEmail(email);
     }
 
-    public Utilisateur rechercherParEmail(String email) {
+    public Utilisateur rechercherParEmail(@RequestParam String email) {
         if (email == null || email.trim().isEmpty()) throw new IllegalArgumentException("L'adresse e-mail est obligatoire.");
         return service.rechercherParEmail(email);
     }
 
+    @GetMapping
     public List<Utilisateur> afficherUtilisateurs() {
         return service.afficher();
     }
 
-    public Utilisateur modifierUtilisateur(Utilisateur utilisateur) {
+    @PutMapping("/{id}")
+    public Utilisateur modifierUtilisateur(
+            @PathVariable int id, @RequestBody Utilisateur utilisateur) {
+        utilisateur.setIdUtilisateur(id);
         verifier(utilisateur);
         verifierId(utilisateur.getIdUtilisateur());
         return service.modifierUtilisateur(utilisateur);
     }
 
-    public void supprimerUtilisateur(int id) {
+    public Utilisateur modifierUtilisateur(Utilisateur utilisateur) {
+        return modifierUtilisateur(utilisateur.getIdUtilisateur(), utilisateur);
+    }
+
+    @DeleteMapping("/{id}")
+    public void supprimerUtilisateur(@PathVariable int id) {
         verifierId(id);
         service.supprimerUtilisateur(id);
     }

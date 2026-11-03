@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription Enseignant</title>
+    <title>Inscription professeur</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
     <script src="<%= request.getContextPath() %>/js/app.js" defer></script>
 </head>
@@ -39,18 +39,18 @@
                 <div>
                     <li>
                         <a href="${pageContext.request.contextPath}/creer_eleve">
-                            <span>Inscription Élève</span>
+                            <span>Inscription étudiant</span>
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/mettreAJourEtudiant">
-                            <span>Réinscrire Élève</span>
+                            <span>Réinscription étudiant</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="${pageContext.request.contextPath}/creer_enseignant"
                            aria-current="page">
-                            <span>Inscription Enseignant</span>
+                            <span>Inscription professeur</span>
                         </a>
                     </li>
                 </div>
@@ -58,17 +58,17 @@
         </li>
         <li>
             <a href="${pageContext.request.contextPath}/connexionProf">
-                <span>Connexion Prof</span>
+                <span>Connexion professeur</span>
             </a>
         </li>
         <li>
             <a href="${pageContext.request.contextPath}/loginController">
-                <span>Connexion Élève</span>
+                <span>Connexion étudiant</span>
             </a>
         </li>
         <li>
             <a href="${pageContext.request.contextPath}/connexionAdmin">
-                <span>Connexion Admin</span>
+                <span>Connexion administrateur</span>
             </a>
         </li>
     </ul>

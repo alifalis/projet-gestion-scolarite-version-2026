@@ -1,17 +1,28 @@
 package service;
 
+import application.SpringContext;
 import dao.ResultatRepository;
 import modele.Resultat;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Service
+@Transactional
 public class ResultatService {
 
     private final ResultatRepository repository;
 
     public ResultatService() {
-        this.repository = new ResultatRepository();
+        this(SpringContext.getBean(ResultatRepository.class));
+    }
+
+    @Autowired
+    public ResultatService(ResultatRepository repository) {
+        this.repository = repository;
     }
 
     public Resultat ajouter(Resultat resultat) {

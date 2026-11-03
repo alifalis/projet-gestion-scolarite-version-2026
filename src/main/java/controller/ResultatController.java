@@ -1,47 +1,72 @@
 package controller;
 
+import application.SpringContext;
 import modele.Resultat;
 import service.ResultatService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/resultats")
 public class ResultatController {
     private final ResultatService service;
 
     public ResultatController() {
-        this.service = new ResultatService();
+        this(SpringContext.getBean(ResultatService.class));
     }
 
-    public Resultat ajouterResultat(Resultat resultat) {
+    @Autowired
+    public ResultatController(ResultatService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Resultat ajouterResultat(@RequestBody Resultat resultat) {
         verifier(resultat);
         return service.ajouter(resultat);
     }
 
-    public Resultat rechercherResultat(int id) {
+    @GetMapping("/{id}")
+    public Resultat rechercherResultat(@PathVariable int id) {
         verifierId(id);
         return service.rechercherParId(id);
     }
 
+    @GetMapping
     public List<Resultat> afficherResultats() {
         return service.lister();
     }
 
-    public List<Resultat> afficherResultatsParEtudiant(int idEtudiant) {
+    @GetMapping("/etudiant/{idEtudiant}")
+    public List<Resultat> afficherResultatsParEtudiant(@PathVariable int idEtudiant) {
         verifierId(idEtudiant);
         return service.rechercherParEtudiant(idEtudiant);
     }
 
-    public List<Resultat> afficherResultatsParEnseignant(int idEnseignant) {
+    @GetMapping("/enseignant/{idEnseignant}")
+    public List<Resultat> afficherResultatsParEnseignant(@PathVariable int idEnseignant) {
         verifierId(idEnseignant);
         return service.rechercherParEnseignant(idEnseignant);
     }
 
-    public Resultat modifierResultat(Resultat resultat) {
+    @PutMapping("/{id}")
+    public Resultat modifierResultat(
+            @PathVariable int id, @RequestBody Resultat resultat) {
+        resultat.setIdResultat(id);
         verifier(resultat);
         verifierId(resultat.getIdResultat());
         return service.modifier(resultat);
     }
 
-    public void supprimerResultat(int id) {
+    public Resultat modifierResultat(Resultat resultat) {
+        return modifierResultat(resultat.getIdResultat(), resultat);
+    }
+
+    @DeleteMapping("/{id}")
+    public void supprimerResultat(@PathVariable int id) {
         verifierId(id);
         service.supprimer(id);
     }

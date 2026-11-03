@@ -1,16 +1,27 @@
 package service;
 
+import application.SpringContext;
 import dao.EnseignantRepository;
 import modele.Enseignant;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class EnseignantService {
 
     private final EnseignantRepository repository;
 
     public EnseignantService() {
-        this.repository = new EnseignantRepository();
+        this(SpringContext.getBean(EnseignantRepository.class));
+    }
+
+    @Autowired
+    public EnseignantService(EnseignantRepository repository) {
+        this.repository = repository;
     }
 
     public Enseignant ajouter(Enseignant enseignant) {

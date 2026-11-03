@@ -1,42 +1,61 @@
 package controller;
 
+import application.SpringContext;
 import modele.InscriptionCours;
 import service.InscriptionCoursService;
 import service.EtudiantService;
 import modele.Etudiant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.ArrayList;
 
 
+@RestController
+@RequestMapping("/api/inscriptions-cours")
 public class InscriptionCoursController {
     private final InscriptionCoursService service;
     private final EtudiantService etudiantService;
 
     public InscriptionCoursController() {
-        this.service = new InscriptionCoursService();
-        this.etudiantService = new EtudiantService();
+        this(SpringContext.getBean(InscriptionCoursService.class),
+                SpringContext.getBean(EtudiantService.class));
     }
 
-    public InscriptionCours ajouterInscription(InscriptionCours inscription) {
+    @Autowired
+    public InscriptionCoursController(
+            InscriptionCoursService service, EtudiantService etudiantService) {
+        this.service = service;
+        this.etudiantService = etudiantService;
+    }
+
+    @PostMapping
+    public InscriptionCours ajouterInscription(@RequestBody InscriptionCours inscription) {
         verifier(inscription);
         return service.ajouter(inscription);
     }
 
-    public InscriptionCours rechercherInscription(int id) {
+    @GetMapping("/{id}")
+    public InscriptionCours rechercherInscription(@PathVariable int id) {
         verifierId(id);
         return service.rechercherParId(id);
     }
 
-    public List<InscriptionCours> afficherInscriptions(int idEtudiant) {
+    @GetMapping("/etudiant/{idEtudiant}")
+    public List<InscriptionCours> afficherInscriptions(@PathVariable int idEtudiant) {
         return service.rechercherParEtudiant(idEtudiant);
     }
 
+    @GetMapping
     public List<InscriptionCours> afficherToutesInscriptions() {
         return service.lister();
     }
 
 
-    public List<Etudiant> afficherCours(int idCours) {
+    @GetMapping("/cours/{idCours}/etudiants")
+    public List<Etudiant> afficherCours(@PathVariable int idCours) {
 
 
         // Récupérer les identifiants des étudiants inscrits au cours
@@ -57,13 +76,17 @@ public class InscriptionCoursController {
         return etudiants;
     }
 
-    public InscriptionCours modifierInscription(InscriptionCours inscription) {
+    @PutMapping("/{id}")
+    public InscriptionCours modifierInscription(
+            @PathVariable int id, @RequestBody InscriptionCours inscription) {
+        inscription.setIdInscription(id);
         verifier(inscription);
         verifierId(inscription.getIdInscription());
         return service.modifier(inscription);
     }
 
-    public void supprimerInscription(int id) {
+    @DeleteMapping("/{id}")
+    public void supprimerInscription(@PathVariable int id) {
         verifierId(id);
         service.supprimer(id);
     }

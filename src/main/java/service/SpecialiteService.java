@@ -1,16 +1,27 @@
 package service;
 
+import application.SpringContext;
 import dao.SpecialiteRepository;
 import modele.Specialite;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class SpecialiteService {
 
     private final SpecialiteRepository repository;
 
     public SpecialiteService() {
-        this.repository = new SpecialiteRepository();
+        this(SpringContext.getBean(SpecialiteRepository.class));
+    }
+
+    @Autowired
+    public SpecialiteService(SpecialiteRepository repository) {
+        this.repository = repository;
     }
 
     public Specialite ajouter(Specialite specialite) {

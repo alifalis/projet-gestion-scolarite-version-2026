@@ -1,16 +1,27 @@
 package service;
 
+import application.SpringContext;
 import dao.EtudiantRepository;
 import modele.Etudiant;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class EtudiantService {
 
     private final EtudiantRepository repository;
 
     public EtudiantService() {
-        this.repository = new EtudiantRepository();
+        this(SpringContext.getBean(EtudiantRepository.class));
+    }
+
+    @Autowired
+    public EtudiantService(EtudiantRepository repository) {
+        this.repository = repository;
     }
 
     public Etudiant ajouter(Etudiant etudiant) {

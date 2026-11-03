@@ -1,46 +1,65 @@
 package controller;
 
+import application.SpringContext;
 import modele.InscriptionAnnee;
 import service.InscriptionAnneeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/inscriptions-annee")
 public class InscriptionAnneeController {
     private final InscriptionAnneeService service;
 
     public InscriptionAnneeController() {
-        this.service = new InscriptionAnneeService();
+        this(SpringContext.getBean(InscriptionAnneeService.class));
     }
 
-    public InscriptionAnnee ajouterInscription(InscriptionAnnee inscription) {
+    @Autowired
+    public InscriptionAnneeController(InscriptionAnneeService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public InscriptionAnnee ajouterInscription(@RequestBody InscriptionAnnee inscription) {
         verifier(inscription);
         return service.ajouter(inscription);
     }
 
-    public InscriptionAnnee rechercherInscription(int id) {
+    @GetMapping("/{id}")
+    public InscriptionAnnee rechercherInscription(@PathVariable int id) {
         verifierId(id);
         return service.rechercherParId(id);
     }
 
     public InscriptionAnnee rechercherParEtudiantEtAnnee(
-            int idEtudiant,
-            String anneeScolaire
+            @RequestParam int idEtudiant,
+            @RequestParam String anneeScolaire
     ) {
         verifierId(idEtudiant);
         return service.rechercherParEtudiantEtAnnee(
                 idEtudiant, anneeScolaire);
     }
 
+    @GetMapping
     public List<InscriptionAnnee> afficherInscriptions() {
         return service.lister();
     }
 
-    public InscriptionAnnee modifierInscription(InscriptionAnnee inscription) {
+    @PutMapping("/{id}")
+    public InscriptionAnnee modifierInscription(
+            @PathVariable int id, @RequestBody InscriptionAnnee inscription) {
+        inscription.setIdInscription(id);
         verifier(inscription);
         verifierId(inscription.getIdInscription());
         return service.modifier(inscription);
     }
 
-    public void supprimerInscription(int id) {
+    @DeleteMapping("/{id}")
+    public void supprimerInscription(@PathVariable int id) {
         verifierId(id);
         service.supprimer(id);
     }

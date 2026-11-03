@@ -1,16 +1,27 @@
 package service;
 
+import application.SpringContext;
 import dao.InscriptionAnneeRepository;
 import modele.InscriptionAnnee;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class InscriptionAnneeService {
 
     private final InscriptionAnneeRepository repository;
 
     public InscriptionAnneeService() {
-        this.repository = new InscriptionAnneeRepository();
+        this(SpringContext.getBean(InscriptionAnneeRepository.class));
+    }
+
+    @Autowired
+    public InscriptionAnneeService(InscriptionAnneeRepository repository) {
+        this.repository = repository;
     }
 
     public InscriptionAnnee ajouter(InscriptionAnnee inscription) {

@@ -1,17 +1,28 @@
 
 package service;
 
+import application.SpringContext;
 import dao.RoleRepository;
 import modele.Role;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class RoleService {
 
     private final RoleRepository roleRepository;
 
     public RoleService() {
-        this.roleRepository = new RoleRepository();
+        this(SpringContext.getBean(RoleRepository.class));
+    }
+
+    @Autowired
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
     // Ajouter un rôle

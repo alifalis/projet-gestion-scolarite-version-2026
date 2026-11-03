@@ -1,52 +1,75 @@
 package controller;
 
+import application.SpringContext;
 import modele.Classe;
 import service.ClasseService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/classes")
 public class ClasseController {
+
     private final ClasseService service;
 
     public ClasseController() {
-        this.service = new ClasseService();
+        this(SpringContext.getBean(ClasseService.class));
     }
 
-    public Classe ajouterClasse(Classe classe) {
-        verifier(classe);
+    @Autowired
+    public ClasseController(ClasseService service) {
+        this.service = service;
+    }
+
+    // Ajouter une classe
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Classe ajouterClasse(@RequestBody Classe classe) {
+
         return service.ajouter(classe);
     }
 
-    public Classe rechercherClasse(int id) {
-        verifierId(id);
+    // Rechercher par ID
+    @GetMapping("/{id}")
+    public Classe rechercherClasse(@PathVariable int id) {
+
         return service.rechercherParId(id);
     }
 
-    public Classe rechercherClasseParNom(String nom) {
-        if (nom == null || nom.trim().isEmpty()) throw new IllegalArgumentException("Le nom de la classe est obligatoire.");
+    // Rechercher par nom
+    @GetMapping("/recherche")
+    public Classe rechercherClasseParNom(@RequestParam String nom) {
+
         return service.rechercherParNom(nom);
     }
 
+    // Afficher toutes les classes
+    @GetMapping
     public List<Classe> afficherClasses() {
+
         return service.lister();
     }
 
-    public Classe modifierClasse(Classe classe) {
-        verifier(classe);
-        verifierId(classe.getIdClasse());
+    // Modifier une classe
+    @PutMapping("/{id}")
+    public Classe modifierClasse(
+            @PathVariable int id,
+            @RequestBody Classe classe) {
+
+        classe.setIdClasse(id);
+
         return service.modifier(classe);
     }
 
-    public void supprimerClasse(int id) {
-        verifierId(id);
+    // Supprimer une classe
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void supprimerClasse(@PathVariable int id) {
+
         service.supprimer(id);
-    }
-
-    private void verifier(Classe classe) {
-        if (classe == null || classe.getNom() == null || classe.getNom().trim().isEmpty())
-            throw new IllegalArgumentException("Le nom de la classe est obligatoire.");
-    }
-
-    private void verifierId(int id) {
-        if (id <= 0) throw new IllegalArgumentException("L'identifiant doit être positif.");
     }
 }
