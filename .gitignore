@@ -1,4 +1,9 @@
+# JDK local
+OpenJDK*/
+
+# Maven
 target/
+.tools/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

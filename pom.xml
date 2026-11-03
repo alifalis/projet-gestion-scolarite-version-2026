@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>25</maven.compiler.release>
         <hibernate.version>6.3.1.Final</hibernate.version> <!-- Version récente de Hibernate -->
         <jakarta.persistence.version>3.1.0</jakarta.persistence.version> <!-- API Jakarta Persistence -->
     </properties>

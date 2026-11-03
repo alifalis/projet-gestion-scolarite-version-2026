@@ -33,7 +33,7 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
 - **Controller** : Servlets pour la gestion des requêtes HTTP et de la logique métier.
 
 ### **Technologies utilisées**
-- **Langages** : Java 21 ou supérieur (J2EE), HTML5, CSS3, JavaScript.
+- **Langages** : Java 25 (J2EE), HTML5, CSS3, JavaScript.
 - **Frameworks** : Hibernate (ORM), Spring (Injection de dépendances et gestion).
 - **Serveur d'applications** : Apache Tomcat.
 - **Base de données** : MySQL.
@@ -47,7 +47,7 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
    git clone https://github.com/abdemeh/gestionScolarite_JEE.git
    ```
 
-2. **Installer Java 21 ou supérieur** et Maven.
+2. **Installer Java 25** et Maven.
 
 3. **Configurer la base de données** :
    - Importer le fichier SQL disponible dans `sql/schema.sql` pour créer la base et les tables.
