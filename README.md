@@ -1,7 +1,7 @@
 
 # Gestion de Scolarité (myCyScolarité - J2EE Project)
 
-**myCyScolarité** est une plateforme de gestion académique développée en Java JEE. Elle vise à fournir aux étudiants, professeurs, et administrateurs une solution complète pour gérer efficacement les inscriptions, les cours, les notes, et autres aspects liés à la scolarité. Ce projet exploite des technologies modernes et des outils avancés pour garantir une expérience utilisateur fluide et des fonctionnalités robustes.
+**myCyScolarité** est une plateforme de gestion académique développée en Java Springboot Elle vise à fournir aux étudiants, professeurs, et administrateurs une solution complète pour gérer efficacement les inscriptions, les cours, les notes, et autres aspects liés à la scolarité. Ce projet exploite des technologies modernes et des outils avancés pour garantir une expérience utilisateur fluide et des fonctionnalités robustes.
 
 ## Fonctionnalités
 
