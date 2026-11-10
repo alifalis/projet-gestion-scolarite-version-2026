@@ -53,7 +53,9 @@ Le projet suit l'architecture **MVC (Model-View-Controller)** pour une séparati
    - Importer le fichier SQL disponible dans `sql/schema.sql` pour créer la base et les tables.
 
 4. **Configurer le projet** :
-   - Configurer `DB_URL`, `DB_USER` et `DB_PASSWORD` ou modifier `src/main/resources/application.properties`.
+   - Pour Docker Compose, copier `.env.example` vers `.env` puis renseigner les variables
+     `MYSQL_ROOT_PASSWORD`, `DB_URL`, `DB_USER` et `DB_PASSWORD`. Le fichier `.env` reste local
+     et n'est pas versionne.
 
 5. **Déployer l’application** :
    - Depuis le projet, lancer `./run-local.sh`.
@@ -80,6 +82,13 @@ au premier démarrage. Pour réinitialiser complètement la base :
 docker compose down -v
 docker compose up --build
 ```
+
+### Pipeline CI/CD
+
+La workflow [ci-cd.yml](.github/workflows/ci-cd.yml) execute les tests Maven sur les pull
+requests et publie l'image Docker dans GitHub Container Registry apres un push sur `main`.
+Elle n'utilise pas les identifiants SQL pour construire l'image. Les identifiants sont
+fournis uniquement au lancement de Docker via `.env` ou les secrets de l'environnement cible.
 
 ## Équipe de Développement
 

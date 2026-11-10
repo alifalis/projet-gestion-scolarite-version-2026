@@ -4,7 +4,7 @@ services:
     # container_name: mysql_container
     #restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD must be set}
       MYSQL_DATABASE: school_data
     ports:
       - "3307:3306"
@@ -31,9 +31,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_URL: jdbc:mysql://mysql:3306/school_data
-      DB_USER: root
-      DB_PASSWORD: root
+      DB_URL: ${DB_URL:-jdbc:mysql://mysql:3306/school_data}
+      DB_USER: ${DB_USER:?DB_USER must be set}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set}
 
 volumes:
   mysql_data:
