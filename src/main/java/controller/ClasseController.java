@@ -54,7 +54,7 @@ public class ClasseController {
         return service.lister();
     }
 
-    // Modifier une classe
+    // Modifier une classes
     @PutMapping("/{id}")
     public Classe modifierClasse(
             @PathVariable int id,
