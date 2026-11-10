@@ -1,8 +1,11 @@
+
 name: CI/CD
 
 on:
   pull_request:
-  push: {}
+  push:
+    branches:
+      - springbatch
 
 permissions:
   contents: read
@@ -14,12 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '25'
           cache: maven
+
       - name: Compiler et exécuter les tests
         run: chmod +x mvnw && ./mvnw --batch-mode clean verify
 
@@ -28,15 +33,78 @@ jobs:
     if: github.event_name == 'push'
     needs: test
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Se connecter à GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Construire l'image Docker
-        run: docker build --tag ghcr.io/${{ github.repository }}:latest .
+        run: |
+          IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}:latest"
+          docker build -t "$IMAGE" .
+
       - name: Publier l'image Docker
-        run: docker push ghcr.io/${{ github.repository }}:latest
+        run: |
+          IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}:latest"
+          docker push "$IMAGE"
+
+  deploy:
+    name: Déployer sur Oracle Cloud
+    if: github.event_name == 'push'
+    needs: docker
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurer SSH
+        env:
+          SSH_KEY: ${{ secrets.ORACLE_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.ORACLE_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/oracle_deploy
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+          chmod 600 ~/.ssh/oracle_deploy
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Transférer les fichiers
+        env:
+          HOST: ${{ secrets.ORACLE_HOST }}
+        run: |
+          ssh -i ~/.ssh/oracle_deploy \
+            -o StrictHostKeyChecking=yes \
+            ubuntu@"$HOST" \
+            "mkdir -p ~/gestionScolarite_JEE/src/main/resources/db"
+
+          scp -i ~/.ssh/oracle_deploy \
+            -o StrictHostKeyChecking=yes \
+            docker-compose.prod.yml \
+            ubuntu@"$HOST":gestionScolarite_JEE/docker-compose.yml
+
+          scp -i ~/.ssh/oracle_deploy \
+            -o StrictHostKeyChecking=yes \
+            src/main/resources/db/schema.sql \
+            ubuntu@"$HOST":gestionScolarite_JEE/src/main/resources/db/schema.sql
+
+      - name: Déployer avec Docker Compose
+        env:
+          HOST: ${{ secrets.ORACLE_HOST }}
+        run: |
+          ssh -i ~/.ssh/oracle_deploy \
+            -o StrictHostKeyChecking=yes \
+            ubuntu@"$HOST" \
+            'cd ~/gestionScolarite_JEE &&
+             sudo docker compose config --quiet &&
+             sudo docker compose pull &&
+             sudo docker compose up -d &&
+             sudo docker compose ps'

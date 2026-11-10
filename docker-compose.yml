@@ -2,32 +2,33 @@ services:
   mysql:
     image: mysql:8.0
     # container_name: mysql_container
-    #restart: unless-stopped
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD must be set}
       MYSQL_DATABASE: school_data
-    ports:
-      - "3307:3306"
+    #ports:
+    #  - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
     #healthcheck:
-     # test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
-      #interval: 10s
-      #timeout: 5s
-      #retries: 10
-      #start_period: 30s
+    #  test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+    #  interval: 10s
+    #  timeout: 5s
+    #  retries: 10
+    #  start_period: 30s
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ${APP_IMAGE:?APP_IMAGE must be set}
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile
     #container_name: gestion_scolaire_app
-    #restart: unless-stopped
+    restart: unless-stopped
     depends_on:
       - mysql
       #mysql:
-       # condition: service_healthy
+      #  condition: service_healthy
     ports:
       - "8080:8080"
     environment:
