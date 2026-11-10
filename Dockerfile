@@ -3,14 +3,16 @@ FROM eclipse-temurin:25-jdk AS build
 
 WORKDIR /app
 
-COPY .mvn/ .mvn/
-COPY mvnw pom.xml ./
+#COPY .mvn/ .mvn/
+#COPY mvnw pom.xml ./
+COPY . .
 
-RUN chmod +x mvnw
+#RUN chmod +x mvnw
 
-COPY src ./src
+#COPY src ./src
 
-RUN ./mvnw clean package -DskipTests
+#RUN ./mvnw clean package -DskipTests
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
 # Étape 2 : exécution
 FROM eclipse-temurin:25-jre

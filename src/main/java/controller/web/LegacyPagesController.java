@@ -5,6 +5,12 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.batch.core.BatchStatus;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -15,9 +21,10 @@ import org.springframework.web.bind.annotation.*;
 import service.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.*;
 import java.util.*;
 
@@ -34,6 +41,9 @@ public class LegacyPagesController {
     private final RoleService roles;
     private final SpecialiteService specialites;
     private final UtilisateurService utilisateurs;
+    private final JobLauncher jobLauncher;
+    private final Job etudiantsExportJob;
+    private final Job enseignantsExportJob;
 
     public LegacyPagesController(
             ClasseService classes, CoursService cours,
@@ -41,7 +51,11 @@ public class LegacyPagesController {
             InscriptionAnneeService inscriptionsAnnee,
             InscriptionCoursService inscriptionsCours, ResultatService resultats,
             RoleService roles, SpecialiteService specialites,
-            UtilisateurService utilisateurs) {
+            UtilisateurService utilisateurs, JobLauncher jobLauncher,
+            @org.springframework.beans.factory.annotation.Qualifier("etudiantsExportJob")
+            Job etudiantsExportJob,
+            @org.springframework.beans.factory.annotation.Qualifier("enseignantsExportJob")
+            Job enseignantsExportJob) {
         this.classes = classes;
         this.cours = cours;
         this.enseignants = enseignants;
@@ -52,6 +66,9 @@ public class LegacyPagesController {
         this.roles = roles;
         this.specialites = specialites;
         this.utilisateurs = utilisateurs;
+        this.jobLauncher = jobLauncher;
+        this.etudiantsExportJob = etudiantsExportJob;
+        this.enseignantsExportJob = enseignantsExportJob;
     }
 
     @GetMapping("/creer_eleve")
@@ -209,20 +226,7 @@ public class LegacyPagesController {
             response.sendRedirect(request.getContextPath() + "/connexionAdmin");
             return;
         }
-        response.setContentType("text/csv; charset=UTF-8");
-        response.setHeader("Content-Disposition", "attachment; filename=etudiants.csv");
-        try (PrintWriter writer = response.getWriter()) {
-            writer.write('\uFEFF');
-            writer.println("ID,Nom,Prénom,Email,Contact,Classe,Filière");
-            for (Etudiant e : etudiants.lister()) {
-                if (e.getUtilisateur() == null) continue;
-                writer.printf("%s,%s,%s,%s,%s,%s,%s%n",
-                        csv(e.getIdEtudiant()), csv(e.getUtilisateur().getNom()),
-                        csv(e.getUtilisateur().getPrenom()), csv(e.getUtilisateur().getEmail()),
-                        csv(e.getContact()), csv(e.getClasse() == null ? "N/A" : e.getClasse().getNom()),
-                        csv(e.getFiliere()));
-            }
-        }
+        envoyerExportCsv(response, etudiantsExportJob, "etudiants.csv");
     }
 
     @GetMapping("/telechargerProfesseursCSV")
@@ -232,18 +236,31 @@ public class LegacyPagesController {
             response.sendRedirect(request.getContextPath() + "/connexionAdmin");
             return;
         }
-        response.setContentType("text/csv; charset=UTF-8");
-        response.setHeader("Content-Disposition", "attachment; filename=professeurs.csv");
-        try (PrintWriter writer = response.getWriter()) {
-            writer.write('\uFEFF');
-            writer.println("ID,Nom,Prénom,Email,Spécialité");
-            for (Enseignant e : enseignants.lister()) {
-                if (e.getUtilisateur() == null) continue;
-                writer.printf("%s,%s,%s,%s,%s%n", csv(e.getIdEnseignant()),
-                        csv(e.getUtilisateur().getNom()), csv(e.getUtilisateur().getPrenom()),
-                        csv(e.getUtilisateur().getEmail()),
-                        csv(e.getSpecialite() == null ? "N/A" : e.getSpecialite().getNom()));
+        envoyerExportCsv(response, enseignantsExportJob, "professeurs.csv");
+    }
+
+    private void envoyerExportCsv(HttpServletResponse response, Job job, String fileName)
+            throws IOException {
+        Path output = Files.createTempFile("gestion-scolarite-", ".csv");
+        try {
+            JobParameters parameters = new JobParametersBuilder()
+                    .addString("outputPath", output.toAbsolutePath().toString())
+                    .addString("requestId", UUID.randomUUID().toString())
+                    .toJobParameters();
+            JobExecution execution = jobLauncher.run(job, parameters);
+            if (execution.getStatus() != BatchStatus.COMPLETED) {
+                throw new IOException("L'export CSV a échoué. Statut : " + execution.getStatus());
             }
+            response.setContentType("text/csv; charset=UTF-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Files.copy(output, response.getOutputStream());
+        } catch (Exception exception) {
+            if (exception instanceof IOException ioException) {
+                throw ioException;
+            }
+            throw new IOException("Erreur lors de la génération du fichier CSV.", exception);
+        } finally {
+            Files.deleteIfExists(output);
         }
     }
 
@@ -380,9 +397,4 @@ public class LegacyPagesController {
         return valeur.trim();
     }
 
-    private String csv(Object value) {
-        String text = value == null ? "" : value.toString();
-        if (!text.isEmpty() && "=+-@".indexOf(text.charAt(0)) >= 0) text = "'" + text;
-        return "\"" + text.replace("\"", "\"\"") + "\"";
-    }
 }
