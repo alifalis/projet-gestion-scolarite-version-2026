@@ -1,40 +1,41 @@
+
 services:
   mysql:
     image: mysql:8.0
-    # container_name: mysql_container
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD must be set}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?required}
       MYSQL_DATABASE: school_data
-    #ports:
-    #  - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
-    #healthcheck:
-    #  test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
-    #  interval: 10s
-    #  timeout: 5s
-    #  retries: 10
-    #  start_period: 30s
 
   app:
-    image: ${APP_IMAGE:?APP_IMAGE must be set}
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile
-    #container_name: gestion_scolaire_app
+    image: ${APP_IMAGE:?required}
     restart: unless-stopped
     depends_on:
       - mysql
-      #mysql:
-      #  condition: service_healthy
-    ports:
-      - "8080:8080"
     environment:
-      DB_URL: ${DB_URL:?DB_URL must be set}
-      DB_USER: ${DB_USER:?DB_USER must be set}
-      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set}
+      DB_URL: ${DB_URL:?required}
+      DB_USER: ${DB_USER:?required}
+      DB_PASSWORD: ${DB_PASSWORD:?required}
+    expose:
+      - "8080"
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
 
 volumes:
   mysql_data:
+  caddy_data:
+  caddy_config:
