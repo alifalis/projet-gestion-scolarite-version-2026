@@ -88,7 +88,7 @@ jobs:
 
           scp -i ~/.ssh/oracle_deploy \
             -o StrictHostKeyChecking=yes \
-            docker-compose.prod.yml \
+            docker-compose.yml \
             ubuntu@"$HOST":gestionScolarite_JEE/docker-compose.yml
 
           scp -i ~/.ssh/oracle_deploy \
