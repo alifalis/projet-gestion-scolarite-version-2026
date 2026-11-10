@@ -25,7 +25,7 @@ jobs:
 
   docker:
     name: Construire et publier Docker
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push'
     needs: test
     runs-on: ubuntu-latest
     steps:
