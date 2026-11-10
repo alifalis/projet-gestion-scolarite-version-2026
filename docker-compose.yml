@@ -31,7 +31,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_URL: ${DB_URL:-jdbc:mysql://mysql:3306/school_data}
+      DB_URL: ${DB_URL:?DB_URL must be set}
       DB_USER: ${DB_USER:?DB_USER must be set}
       DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set}
 
