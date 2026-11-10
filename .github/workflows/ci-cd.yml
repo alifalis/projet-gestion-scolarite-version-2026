@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   test:
+    name: Compiler et tester
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,26 +20,23 @@ jobs:
           distribution: temurin
           java-version: '25'
           cache: maven
-      - run: chmod +x mvnw && ./mvnw --batch-mode verify
+      - name: Compiler et exécuter les tests
+        run: chmod +x mvnw && ./mvnw --batch-mode clean verify
 
   docker:
+    name: Construire et publier Docker
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: test
     runs-on: ubuntu-latest
-    env:
-      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-      DB_URL: ${{ secrets.DB_URL }}
-      DB_USER: ${{ secrets.DB_USER }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
-      - name: Validate Docker Compose configuration
-        run: docker compose config --quiet
-      - name: Publish image
+      - name: Se connecter à GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker build -t ghcr.io/${{ github.repository }}:latest .
-      - run: docker push ghcr.io/${{ github.repository }}:latest
+      - name: Construire l'image Docker
+        run: docker build --tag ghcr.io/${{ github.repository }}:latest .
+      - name: Publier l'image Docker
+        run: docker push ghcr.io/${{ github.repository }}:latest
